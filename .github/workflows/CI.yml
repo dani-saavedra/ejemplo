@@ -1,0 +1,19 @@
+name: Integracion continua
+on:
+  pull_request:
+    branches: [ "develop","master" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargando el proyectico
+        uses: actions/checkout@v4
+      - name: Instalando el Javita
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Compilando el proyecto
+        uses: gradle/gradle-build-action@v2
+      - name: Execute Gradle build
+        run: ./gradlew build
